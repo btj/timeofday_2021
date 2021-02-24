@@ -11,24 +11,26 @@ package timeofday;
 public class TimeOfDay {
 	
 	/**
-	 * @invar The minutes since midnight are between 0 and 24 * 60 - 1
-	 *     | 0 <= minutesSinceMidnight &&
-	 *     | minutesSinceMidnight < 24 * 60
+	 * @invar The hours are between zero and 23
+	 *     | 0 <= hours && hours <= 23
+	 * @invar The minutes are between zero and 59
+	 *     | 0 <= minutes && minutes <= 59
 	 */
-	private int minutesSinceMidnight;
+	private int hours;
+	private int minutes;
 	
 	/**
 	 * @basic
 	 */
 	public int getHours() { 
-		return minutesSinceMidnight / 60;
+		return hours;
 	}
 
 	/**
 	 * @basic
 	 */
 	public int getMinutes() {
-		return minutesSinceMidnight % 60;
+		return minutes;
 	}
 	
 	/**
@@ -58,7 +60,8 @@ public class TimeOfDay {
 		if (minutes < 0 || 59 < minutes)
 			throw new IllegalArgumentException("Bad minutes");
 		
-		minutesSinceMidnight = hours * 60 + minutes;
+		this.hours = hours;
+		this.minutes = minutes;
 	}
 	
 	/**
@@ -82,7 +85,7 @@ public class TimeOfDay {
 		if (hours < 0 || 23 < hours)
 			throw new IllegalArgumentException("Bad hours");
 		
-		minutesSinceMidnight = hours * 60 + minutesSinceMidnight % 60;
+		this.hours = hours;
 	}
 	
 	/**
@@ -100,6 +103,6 @@ public class TimeOfDay {
 		if (minutes < 0 || 59 < minutes)
 			throw new IllegalArgumentException("Bad minutes");
 		
-		minutesSinceMidnight = minutesSinceMidnight / 60 * 60 + minutes;
+		this.minutes = minutes;
 	}
 }
